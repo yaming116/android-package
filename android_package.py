@@ -125,21 +125,31 @@ def main():
         make_icon()
     except Exception as e:
         print 'make icon error: message is : %s' % e.message
+        raise e
 
     try:
         cp_resource()
     except Exception as e:
         print 'copy resource error: message is : %s' % e.message
+        raise e
 
     try:
         update_prop()
     except Exception as e:
         print 'update prop error: message is : %s' % e.message
+        raise e
 
     try:
         make_wx()
     except Exception as e:
         print 'make wx error: message is : %s' % e.message
+        raise e
+
+    try:
+        add_x()
+    except Exception as e:
+        print 'add chmod exception , message is : %s' % e.message
+        raise e
 
     try:
         command = 'cd %s && %s aR' % (source, gradlew)
