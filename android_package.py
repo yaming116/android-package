@@ -49,6 +49,7 @@ json_config_option = None
 config_json_path = os.path.join(config, 'config.json')
 icon = os.path.join(config, 'icon', 'icon.png')
 config_image = os.path.join(config, 'images')
+config_apk = os.path.join(config, 'apk')
 
 
 resource = {config_json_path, source, config, icon}
@@ -73,6 +74,10 @@ def check_config():
     # check image resource
     images.check_images(config_image, verbose)
 
+    #
+    if not os.path.exists(config_apk):
+        os.makedirs(config_apk)
+
 
 def make_icon():
     if verbose:
@@ -95,7 +100,7 @@ def update_prop():
 
     data = json_config_data['prop_list']
     json_config_option = json_config_data['option_list']
-    update_properties.update_properties(data, gradle_path, verbose)
+    update_properties.update_properties(data, gradle_path, config_apk, verbose)
 
 
 def make_wx():
@@ -138,6 +143,12 @@ def main():
 
     try:
         subprocess.check_call('cd %s && %s aR' % (source, gradlew), shell=True)
+
+        apk = json_config_data['prop_list']['APK_PATH']
+
+        print '======================================='
+        print 'app_path: %s' % apk
+        print '======================================='
     except Exception as e:
         print 'package error: message is : %s' % e.message
 

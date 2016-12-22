@@ -4,11 +4,13 @@
 'update properties'
 
 from utils import utils
+import os
 import codecs
 import re
+import time
 
 
-def update_properties(config_json_data, props_path, verbose = False):
+def update_properties(config_json_data, props_path, config_apk, verbose = False):
 
     if verbose:
         print 'start update properties'
@@ -19,6 +21,21 @@ def update_properties(config_json_data, props_path, verbose = False):
     for key, value in config_json_data.items():
         data = re.sub(pattern % key, '%s = %s' % (key, value), data)
 
+    apk_path = config_json_data.get('APK_PATH')
+
+    localtime = time.localtime(time.time())
+    day = time.strftime("%Y-%m-%d", time.localtime())
+    id = int(time.mktime(localtime) / 10)
+    ipa_name = '%s_%s.apk' % (day, id)
+
+    if not apk_path:
+        value = os.path.join(config_apk, ipa_name)
+        key = 'APK_PATH'
+        config_json_data[key] = value
+        data = re.sub(pattern % key, '%s = %s' % (key, value), data)
+    else:
+        pass
+
     with codecs.open(props_path, 'w', "utf-8") as header_file:
         header_file.write(data)
 
@@ -27,4 +44,5 @@ if __name__ == '__main__':
     json = utils.load_json_from_file('./resource/config.json')
     properties_path = './Rubik3.0/app/gradle.properties'
 
-    update_properties(json['prop_list'], properties_path, True)
+    update_properties(json['prop_list'], properties_path, os.path.abspath('./resource/apk'), True)
+    print json['prop_list']['APK_PATH']
