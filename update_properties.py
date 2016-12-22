@@ -16,10 +16,10 @@ def update_properties(config_json_data, props_path, config_apk, verbose = False)
         print 'start update properties'
 
     data = utils.load_data_from_file(props_path, verbose)
-    pattern = r'\%s\b\s=.*'
+    pattern = r'\b%s\b\s=.*'
 
     for key, value in config_json_data.items():
-        data = re.sub(pattern % key, '%s = %s' % (key, value), data)
+        data = re.sub(pattern % key, r'%s = %s' % (key, value), data)
 
     apk_path = config_json_data.get('APK_PATH')
 
@@ -28,11 +28,11 @@ def update_properties(config_json_data, props_path, config_apk, verbose = False)
     id = int(time.mktime(localtime) / 10)
     ipa_name = '%s_%s.apk' % (day, id)
 
-    if not apk_path or len(apk_path) <= 0 :
+    if apk_path == None or len(apk_path) <= 0 :
         value = os.path.join(config_apk, ipa_name)
-        key = 'APK_PATH'
+        key = u'APK_PATH'
         config_json_data[key] = value
-        data = re.sub(pattern % key, '%s = %s' % (key, value), data)
+        data = re.sub(pattern % key, r'%s = %s' % (key, value), data)
     else:
         pass
 
