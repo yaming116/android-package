@@ -142,7 +142,10 @@ def main():
         print 'make wx error: message is : %s' % e.message
 
     try:
-        subprocess.check_call('cd %s && %s aR' % (source, gradlew), shell=True)
+        command = 'cd %s && %s aR' % (source, gradlew)
+        if verbose:
+            print 'package command %s' % command
+        subprocess.check_call(command, shell=True)
 
         apk = json_config_data['prop_list']['APK_PATH']
 
