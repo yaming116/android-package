@@ -36,6 +36,7 @@ if verbose:
     print 'source path: %s' % source
     print 'is test: %s' % test
 
+basename = os.path.basename(source)
 app = os.path.join(source, 'app')
 wx_activity_path = os.path.join(app, 'src/main/java/com/rubik/test/patient/wxapi/WXPayEntryActivity.java')
 res = os.path.join(app, 'src', 'main', 'res')
@@ -100,7 +101,7 @@ def update_prop():
 
     data = json_config_data['prop_list']
     json_config_option = json_config_data['option_list']
-    update_properties.update_properties(data, gradle_path, config_apk, test, verbose)
+    update_properties.update_properties(data, gradle_path, config_apk, basename, test, verbose)
 
 
 def make_wx():

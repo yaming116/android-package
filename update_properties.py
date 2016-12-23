@@ -10,7 +10,7 @@ import re
 import time
 
 
-def update_properties(config_json_data, props_path, config_apk, test, verbose = False):
+def update_properties(config_json_data, props_path, config_apk, basename, test, verbose = False):
 
     if verbose:
         print 'start update properties'
@@ -32,12 +32,12 @@ def update_properties(config_json_data, props_path, config_apk, test, verbose = 
             raise ValueError('test http path not found')
 
     localtime = time.localtime(time.time())
-    day = time.strftime("%Y-%m-%d", time.localtime())
+    day = time.strftime("%Y-%m-%d %H:%M", time.localtime())
     id = int(time.mktime(localtime) / 10)
     if test:
-        ipa_name = '%s_%s_test.apk' % (day, id)
+        ipa_name = '%s_%s_test_%s.apk' % (day, id, basename)
     else:
-        ipa_name = '%s_%s.apk' % (day, id)
+        ipa_name = '%s_%s_%s.apk' % (day, id, basename)
 
     if not apk_path or len(apk_path) <= 0 :
         value = os.path.join(config_apk, ipa_name)
