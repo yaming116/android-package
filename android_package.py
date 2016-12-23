@@ -50,7 +50,7 @@ json_config_option = None
 config_json_path = os.path.join(config, 'config.json')
 icon = os.path.join(config, 'icon', 'icon.png')
 config_image = os.path.join(config, 'images')
-config_apk = os.path.join(config, '..', 'apk')
+config_apk = os.path.join(os.path.abspath(os.path.join(config, '..')), 'apk')
 
 
 resource = {config_json_path, source, config, icon}
