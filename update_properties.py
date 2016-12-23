@@ -32,7 +32,7 @@ def update_properties(config_json_data, props_path, config_apk, basename, test, 
             raise ValueError('test http path not found')
 
     localtime = time.localtime(time.time())
-    day = time.strftime("%Y-%m-%d %H:%M", time.localtime())
+    day = time.strftime("%Y-%m-%d_%H:%M", time.localtime())
     id = int(time.mktime(localtime) / 10)
     if test:
         ipa_name = '%s_%s_test_%s.apk' % (day, id, basename)
