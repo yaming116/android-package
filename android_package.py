@@ -152,7 +152,7 @@ def main():
         raise e
 
     try:
-        command = 'cd %s && %s aR' % (source, gradlew)
+        command = 'cd %s && %s clean aR' % (source, gradlew)
         if verbose:
             print 'package command %s' % command
         subprocess.check_call(command, shell=True)
