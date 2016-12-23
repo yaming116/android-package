@@ -100,7 +100,7 @@ def update_prop():
 
     data = json_config_data['prop_list']
     json_config_option = json_config_data['option_list']
-    update_properties.update_properties(data, gradle_path, config_apk, verbose)
+    update_properties.update_properties(data, gradle_path, config_apk, test, verbose)
 
 
 def make_wx():
