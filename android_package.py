@@ -15,10 +15,11 @@ import wx_maker
 
 __author__ = 'sunshanming'
 
-parser = argparse.ArgumentParser(description='a script for build ios package')
-parser.add_argument('--source', dest='source', help='ios source path', required=True)
-parser.add_argument('--config', dest='config', help='ios config path', required=True)
-parser.add_argument('-test', '--test', dest='test', action='store_true' , help='test ipa build')
+parser = argparse.ArgumentParser(description='a script for build android package')
+parser.add_argument('--source', dest='source', help='android source path', required=True)
+parser.add_argument('--config', dest='config', help='android config path', required=True)
+parser.add_argument('-name', '--name', dest='name', default='app' , help='project name')
+parser.add_argument('-test', '--test', dest='test', action='store_true' , help='test apk build')
 parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='Print verbose logging.')
 
 args = parser.parse_args()
@@ -27,6 +28,7 @@ verbose = args.verbose or False
 test = args.test or False
 parent_config = os.path.abspath(args.config)
 source = os.path.abspath(args.source)
+name = args.name
 
 config = os.path.join(parent_config, 'resource')
 
@@ -37,7 +39,7 @@ if verbose:
     print 'is test: %s' % test
 
 basename = os.path.basename(source)
-app = os.path.join(source, 'app')
+app = os.path.join(source, name)
 wx_activity_path = os.path.join(app, 'src/main/java/com/rubik/test/patient/wxapi/WXPayEntryActivity.java')
 res = os.path.join(app, 'src', 'main', 'res')
 default_res = os.path.join(res, 'drawable-hdpi')
