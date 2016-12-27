@@ -48,10 +48,12 @@ gradle_path = os.path.join(app, 'gradle.properties')
 
 json_config_data = None
 json_config_option = None
+json_config_image_data = None
 
 config_json_path = os.path.join(config, 'config.json')
 icon = os.path.join(config, 'icon', 'icon.png')
 config_image = os.path.join(config, 'images')
+config_image_path = os.path.join(source, 'config.json')
 config_apk = os.path.join(os.path.abspath(os.path.join(config, '..')), 'apk')
 
 
@@ -74,8 +76,17 @@ def check_config():
             if verbose:
                 print 'config: %s' % p
 
+    # load bundle json data
+    if os.path.exists(config_image_path):
+        data = tools.load_json_from_file(config_image_path)
+        global json_config_image_data
+        json_config_image_data = data
+    else:
+        if verbose:
+            print 'not found %s' % config_image_path
+
     # check image resource
-    images.check_images(config_image, verbose)
+    images.check_images(config_image, json_config_image_data, verbose)
 
     #
     if not os.path.exists(config_apk):
@@ -93,7 +104,7 @@ def cp_resource():
     if verbose:
         print 'start cp resource'
 
-    images.copy(config_image, default_res, verbose)
+    images.copy(config_image, json_config_image_data, default_res, verbose)
 
 
 def update_prop():

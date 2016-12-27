@@ -35,21 +35,26 @@ def make(icon, icon_dist, verbose):
         subprocess.check_call(command % (size, size, icon, path.join(icon_dist, name, 'res_ic_launcher.png')), shell=True)
 
 
-def check_images(image_resource, verbose):
+def check_images(image_resource, config_image_json, verbose):
     if verbose:
         print 'start check image file'
 
-    for image in cp_list:
+    if not config_image_json:
+        config_image_json = cp_list
+    for image in config_image_json:
         name = image['name']
         p = path.join(image_resource, name)
         if not (path.exists(p)):
             raise ValueError('image not exist: %s' % p)
 
 
-def copy(image_resource, app_image_folder_dist, verbose):
+def copy(image_resource, config_image_json, app_image_folder_dist, verbose):
     if verbose:
         print 'start image copy'
-    for image in cp_list:
+
+    if not config_image_json:
+        config_image_json = cp_list
+    for image in config_image_json:
         name = image['name']
         p = path.join(image_resource, name)
         shutil.copy(p, app_image_folder_dist)
