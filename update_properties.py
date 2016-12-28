@@ -30,6 +30,10 @@ def update_properties(config_json_data, props_path, config_apk, basename, test, 
             data = re.sub(pattern % key, r'%s = %s' % (key, value), data)
         else:
             raise ValueError('test http path not found')
+    else:
+        http_path = config_json_data.get('HTTP_PATH', '')
+
+    update_rubik_x_http(os.path.dirname(props_path), http_path, verbose)
 
     localtime = time.localtime(time.time())
     day = time.strftime("%Y-%m-%d_%H:%M", time.localtime())
@@ -48,6 +52,22 @@ def update_properties(config_json_data, props_path, config_apk, basename, test, 
         pass
 
     with codecs.open(props_path, 'w', "utf-8") as header_file:
+        header_file.write(data)
+
+
+def update_rubik_x_http(basepath, http_path, verbose=False):
+    http_config = os.path.join(basepath, 'src', 'main', 'assets', 'http_config.xml')
+
+    if not os.path.exists(http_config):
+        print 'http_config.xml not found'
+        return
+
+    data = utils.load_data_from_file(http_config, verbose)
+
+    pattern = r'(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?'
+    data = re.sub(pattern, http_path, data)
+
+    with codecs.open(http_config, 'w', "utf-8") as header_file:
         header_file.write(data)
 
 

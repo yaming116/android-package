@@ -37,6 +37,7 @@ if verbose:
     print 'config path: %s' % config
     print 'source path: %s' % source
     print 'is test: %s' % test
+    print 'name is: %s' % name
 
 basename = os.path.basename(source)
 app = os.path.join(source, name)
