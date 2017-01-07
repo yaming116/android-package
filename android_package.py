@@ -41,7 +41,7 @@ if verbose:
 
 basename = os.path.basename(source)
 app = os.path.join(source, name)
-wx_activity_path = os.path.join(app, 'src/main/java/com/rubik/test/patient/wxapi/WXPayEntryActivity.java')
+wx_activity_path = os.path.join(app, 'src/main/java/com/rubik/demo/patient/wxapi/WXPayEntryActivity.java')
 res = os.path.join(app, 'src', 'main', 'res')
 default_res = os.path.join(res, 'drawable-hdpi')
 gradlew = os.path.join(source, 'gradlew')
