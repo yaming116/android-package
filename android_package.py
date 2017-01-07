@@ -123,6 +123,10 @@ def make_wx():
     package = json_config_data['prop_list']['PACKAGE_NAME']
     if wx_path and len(wx_path) > 0:
         wx_store_path = os.path.join(app, wx_path)
+        if not os.path.exists(wx_store_path):
+            os.makedirs(wx_store_path)
+            if verbose:
+                print 'make wx dir: %s' % wx_store_path
         wx_maker.wx_cp(wx_activity_path, package, wx_store_path, verbose)
     else:
         print 'not found wx call back'
