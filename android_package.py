@@ -119,9 +119,9 @@ def update_prop():
 
 
 def make_wx():
-    wx_path = json_config_option['WX_CALLBACK']
-    package = json_config_data['prop_list']['PACKAGE_NAME']
+    wx_path = json_config_option.get('WX_CALLBACK')
     if wx_path and len(wx_path) > 0:
+        package = json_config_data['prop_list']['PACKAGE_NAME']
         wx_store_path = os.path.join(app, wx_path)
         if not os.path.exists(wx_store_path):
             os.makedirs(wx_store_path)
