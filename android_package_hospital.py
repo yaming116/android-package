@@ -142,11 +142,6 @@ def main():
             print 'package command %s' % command
         subprocess.check_call(command, shell=True)
 
-        apk = json_config_data['prop_list']['APK_PATH']
-
-        print '======================================='
-        print 'app_path: %s' % apk
-        print '======================================='
     except Exception as e:
         print 'package error: message is : %s' % e.message
 
