@@ -32,7 +32,7 @@ def make(icon, icon_dist, verbose):
         if not os.path.exists(icon_path):
             os.makedirs(icon_path)
 
-        subprocess.check_call(command % (size, size, icon, path.join(icon_dist, name, 'res_ic_launcher.png')), shell=True)
+        subprocess.check_call(command % (size, size, icon, path.join(icon_dist, name, 'ic_launcher.png')), shell=True)
 
 
 def check_images(image_resource, config_image_json, verbose):
@@ -57,7 +57,10 @@ def copy(image_resource, config_image_json, app_image_folder_dist, verbose):
     for image in config_image_json:
         name = image['name']
         p = path.join(image_resource, name)
-        shutil.copy(p, app_image_folder_dist)
+        if os.path.exists(p) :
+            shutil.copy(p, app_image_folder_dist)
+        else:
+            print 'not found %s' % p
 
 
 if __name__ == '__main__':
