@@ -54,7 +54,7 @@ icon = os.path.join(config, 'icon', 'icon1.png')
 icon_2 = os.path.join(config, 'icon', 'icon2.png')
 config_image = os.path.join(config, 'images')
 config_image_path = os.path.join(source, 'config.json')
-config_apk = os.path.join(os.path.abspath(os.path.join(config, '..')), 'apk', os.path.sep)
+config_apk = os.path.join(os.path.abspath(os.path.join(config, '..')), 'apk/')
 
 
 def add_x():
