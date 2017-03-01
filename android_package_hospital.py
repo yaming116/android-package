@@ -74,12 +74,12 @@ def make_icon():
         print 'start make icon'
 
     if os.path.exists(icon) :
-        images.make(icon, res, verbose)
+        images.make(icon, res, verbose, 'hospital')
     else:
         print 'not found icon1.png,path: %s' % icon
 
     if os.path.exists(icon_2):
-        images.make(icon_2, res_2, verbose)
+        images.make(icon_2, res_2, verbose, 'hospital')
     else:
         print 'not found icon2.png, path: %s' % icon_2
 

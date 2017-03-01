@@ -17,7 +17,7 @@ cp_list = [{'name': 'ico_user_login_logo.png'},
            {'name' : 'bg_home_page_welcome_logo.png'}]
 
 
-def make(icon, icon_dist, verbose):
+def make(icon, icon_dist, verbose, source = None):
 
     if verbose:
         print 'start make icon'
@@ -31,8 +31,10 @@ def make(icon, icon_dist, verbose):
         icon_path = path.join(icon_dist, name);
         if not os.path.exists(icon_path):
             os.makedirs(icon_path)
-
-        subprocess.check_call(command % (size, size, icon, path.join(icon_dist, name, 'ic_launcher.png')), shell=True)
+        res_name = 'res_ic_launcher.png'
+        if source == 'hospital' :
+            res_name = 'ic_launcher.png'
+        subprocess.check_call(command % (size, size, icon, path.join(icon_dist, name, res_name)), shell=True)
 
 
 def check_images(image_resource, config_image_json, verbose):
