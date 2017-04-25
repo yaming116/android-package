@@ -129,7 +129,15 @@ def make_wx():
                 print 'make wx dir: %s' % wx_store_path
         wx_maker.wx_cp(wx_activity_path, package, wx_store_path, verbose)
     else:
-        print 'not found wx call back'
+        print '没有发现微信回调,如果需要微信支付请选择'
+
+
+def make_key_store():
+    key_store = json_config_option.get('key')
+    if key_store and len(key_store) > 0:
+        update_properties.update_key_store(key_store, gradle_path, verbose)
+    else:
+        raise ValueError('没有配置证书,请选择证书')
 
 
 def main():
