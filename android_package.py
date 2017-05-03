@@ -167,6 +167,12 @@ def main():
         raise e
 
     try:
+        make_key_store()
+    except Exception as e:
+        print 'make key store: message is : %s' % e.message
+        raise e
+
+    try:
         make_wx()
     except Exception as e:
         print 'make wx error: message is : %s' % e.message
