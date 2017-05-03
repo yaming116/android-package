@@ -77,12 +77,14 @@ def update_key_store(config_json_data, props_path,verbose=False):
     data = utils.load_data_from_file(props_path, verbose)
     pattern = prop_pattern
 
+    print 'key store data: %s' % config_json_data
+
     for key, value in config_json_data.items():
         data = re.sub(pattern % key, r'%s = %s' % (key, value), data)
 
     with codecs.open(props_path, 'w', "utf-8") as header_file:
         header_file.write(data)
-    pass
+
 
 if __name__ == '__main__':
     json = utils.load_json_from_file('./resource/config.json')

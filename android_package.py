@@ -135,7 +135,7 @@ def make_wx():
 def make_key_store():
     key_store = json_config_option.get('key')
     if key_store and len(key_store) > 0:
-        update_properties.update_key_store(key_store, gradle_path, verbose)
+        update_properties.update_key_store(tools.load_json_from_file(key_store, verbose), gradle_path, verbose)
     else:
         raise ValueError('没有配置证书,请选择证书')
 
@@ -164,6 +164,12 @@ def main():
         update_prop()
     except Exception as e:
         print 'update prop error: message is : %s' % e.message
+        raise e
+
+    try:
+        make_key_store()
+    except Exception as e:
+        print 'make key store: message is : %s' % e.message
         raise e
 
     try:
