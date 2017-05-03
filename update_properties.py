@@ -9,6 +9,11 @@ import codecs
 import re
 import time
 
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 prop_pattern = r'\b%s\b\s=.*'
 
 
