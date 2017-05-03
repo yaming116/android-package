@@ -85,6 +85,7 @@ def update_key_store(config_json_data, props_path,verbose=False):
     print 'key store data: %s' % config_json_data
 
     for key, value in config_json_data.items():
+        value = value.encode('unicode-escape')
         data = re.sub(pattern % key, r'%s = %s' % (key, value), data)
 
     with codecs.open(props_path, 'w', "utf-8") as header_file:
