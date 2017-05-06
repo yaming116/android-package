@@ -30,9 +30,9 @@ if verbose:
 
 bugly_ids = None
 if 'android' == type:
-    bugly_ids = tools.load_json_from_file(os.path.join('.', 'android.json'))
+    bugly_ids = tools.load_json_from_file(os.path.abspath('./android.json'))
 else:
-    bugly_ids = tools.load_json_from_file(os.path.join('.', './ios.json'))
+    bugly_ids = tools.load_json_from_file(os.path.abspath('./ios.json'))
 
 
 def upload(rawPath, updateDescription, config):
@@ -73,5 +73,5 @@ index = random.randint(0, 5)
 
 for file in os.listdir(source):
     if (re.match(r'.*-release.*', file)):
-        upload(os.path.abspath(os.path.join(source, file)), 'test', bugly_ids[index])
+        upload(os.path.abspath(os.path.join(source, file)), file, bugly_ids[index])
         break
