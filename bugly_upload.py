@@ -30,9 +30,9 @@ if verbose:
 
 bugly_ids = None
 if 'android' == type:
-    bugly_ids = tools.load_json_from_file('./android.json')
+    bugly_ids = tools.load_json_from_file(os.path.join('.', 'android.json'))
 else:
-    bugly_ids = tools.load_json_from_file('./ios.json')
+    bugly_ids = tools.load_json_from_file(os.path.join('.', './ios.json'))
 
 
 def upload(rawPath, updateDescription, config):
