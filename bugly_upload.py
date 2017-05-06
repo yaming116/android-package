@@ -17,22 +17,28 @@ parser = argparse.ArgumentParser(description='a script for upload apk or ipa to 
 parser.add_argument('--type', dest='type', help='app type, ios or android', default='android')
 parser.add_argument('--source', dest='source', help='apk or ipa dir', required=True)
 parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='Print verbose logging.')
+parser.add_argument('-t', '--test', dest='test', action='store_true', help='testing.')
 
 args = parser.parse_args()
 
 verbose = args.verbose or False
+test = args.test or False
 type = args.type
 source = os.path.abspath(args.source)
 
 if verbose:
     print 'type: %s' % type
     print 'source: %s' % source
-
+base_path = None
+if test:
+    base_path = '/Volumes/BAK/build/android-package'
+else:
+    base_path = '.'
 bugly_ids = None
 if 'android' == type:
-    bugly_ids = tools.load_json_from_file(os.path.abspath('./android.json'))
+    bugly_ids = tools.load_json_from_file(os.path.abspath(os.path.join(base_path, '/android.json')))
 else:
-    bugly_ids = tools.load_json_from_file(os.path.abspath('./ios.json'))
+    bugly_ids = tools.load_json_from_file(os.path.abspath(os.path.join(base_path, os.path.abspath('./ios.json'))))
 
 
 def upload(rawPath, updateDescription, config):
