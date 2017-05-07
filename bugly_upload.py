@@ -62,10 +62,13 @@ def upload(rawPath, updateDescription, config):
             if (result['rtcode'] == 0):
                 url = result['data']['url']
                 print 'downLoadUrl: %s' % url
-                image = qrcode.make(url)
-                image_path = os.path.abspath(os.path.join(source, 'QRCode.png'))
-                image.save(image_path)
-                print 'saveQRCodePath: %s' % image_path
+                try:
+                    image = qrcode.make(url)
+                    image_path = os.path.abspath(os.path.join(source, 'QRCode.png'))
+                    image.save(image_path)
+                    print 'saveQRCodePath: %s' % image_path
+                except Exception as e:
+                    print e
             print result
             return result
         except requests.exceptions.ConnectionError:
