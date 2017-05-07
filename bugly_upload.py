@@ -8,6 +8,7 @@ import requests
 import datetime,time
 import random
 import re
+import qrcode
 
 'a script for upload apk or ipa to bugly'
 
@@ -59,7 +60,12 @@ def upload(rawPath, updateDescription, config):
             assert resp.status_code == requests.codes.ok
             result = resp.json()
             if (result['rtcode'] == 0):
-                print 'downLoadUrl: %s' % result['data']['url']
+                url = result['data']['url']
+                print 'downLoadUrl: %s' % url
+                image = qrcode.make(url)
+                image_path = os.path.abspath(os.path.join(source, 'QRCode.png'))
+                image.save(image_path)
+                print 'saveQRCodePath: %s' % image_path
             print result
             return result
         except requests.exceptions.ConnectionError:
