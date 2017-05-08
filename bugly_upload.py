@@ -22,10 +22,10 @@ __author__ = 'sunshanming'
 
 parser = argparse.ArgumentParser(description='a script for upload apk or ipa to bugly')
 parser.add_argument('--type', dest='type', help='app type, ios or android', default='android')
-parser.add_argument('--source', dest='source', help='apk or ipa dir', requre=True)
+parser.add_argument('--source', dest='source', help='apk or ipa dir', required=True)
 parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='Print verbose logging.')
 parser.add_argument('-t', '--test', dest='test', action='store_true', help='testing.')
-parser.add_argument('-d', '--desc', dest='desc', help='file desc', requre=True)
+parser.add_argument('-d', '--desc', dest='desc', help='file desc', required=True)
 
 args = parser.parse_args()
 
