@@ -55,7 +55,6 @@ else:
 
 
 def upload(rawPath, updateDescription, config):
-    rawPath = unicode(rawPath, 'gbk')
     print("Begin to upload ipa to bugly: %s" % rawPath)
     headers = {'enctype': 'multipart/form-data'}
     payload = {
