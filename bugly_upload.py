@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # _*_ coding: utf-8 _*_
+#coding=utf-8
 
 import argparse
 import os
@@ -9,6 +10,11 @@ import datetime,time
 import random
 import re
 import qrcode
+import sys
+import os
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 'a script for upload apk or ipa to bugly'
 
@@ -16,9 +22,10 @@ __author__ = 'sunshanming'
 
 parser = argparse.ArgumentParser(description='a script for upload apk or ipa to bugly')
 parser.add_argument('--type', dest='type', help='app type, ios or android', default='android')
-parser.add_argument('--source', dest='source', help='apk or ipa dir', required=True)
+parser.add_argument('--source', dest='source', help='apk or ipa dir', requre=True)
 parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='Print verbose logging.')
 parser.add_argument('-t', '--test', dest='test', action='store_true', help='testing.')
+parser.add_argument('-d', '--desc', dest='desc', help='file desc', requre=True)
 
 args = parser.parse_args()
 
@@ -26,10 +33,15 @@ verbose = args.verbose or False
 test = args.test or False
 type = args.type
 source = os.path.abspath(args.source)
+desc = args.desc
+
+app_prefix = os.getenv('APP_NAME_PREFIX', 'app-')
+desc = desc.replace(app_prefix, '')
 
 if verbose:
     print 'type: %s' % type
     print 'source: %s' % source
+    print 'desc: %s' % desc
 base_path = None
 if test:
     base_path = '/Volumes/BAK/build/android-package'
@@ -43,12 +55,13 @@ else:
 
 
 def upload(rawPath, updateDescription, config):
+    rawPath = unicode(rawPath, 'gbk')
     print("Begin to upload ipa to bugly: %s" % rawPath)
     headers = {'enctype': 'multipart/form-data'}
     payload = {
         'app_id': config['app_id'],
         'pid': config['pid'],
-        'title': updateDescription  # 版本更新描述
+        'title': desc  # 版本更新描述
     }
 
     try_times = 0
@@ -87,6 +100,7 @@ def upload(rawPath, updateDescription, config):
 index = random.randint(0, 4)
 
 for file in os.listdir(source):
-    if (re.match(r'.*-release.*', file)):
-        upload(os.path.abspath(os.path.join(source, file)), file, bugly_ids[index])
+    name = file
+    if (re.match(r'.*-release.*', name)):
+        upload(os.path.abspath(os.path.join(source, name)), name, bugly_ids[index])
         break
