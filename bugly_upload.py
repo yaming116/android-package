@@ -84,7 +84,7 @@ def upload(rawPath, updateDescription, config):
             raise Exception("Failed to upload ipa to Pgyer, retried 5 times.")
 
 
-index = random.randint(0, 5)
+index = random.randint(0, 4)
 
 for file in os.listdir(source):
     if (re.match(r'.*-release.*', file)):
