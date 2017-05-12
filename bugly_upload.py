@@ -100,6 +100,6 @@ index = random.randint(0, 4)
 
 for file in os.listdir(source):
     name = file
-    if (re.match(r'.*-release.*', name)):
+    if (re.match(r'.*[rR]elease.*', name)):
         upload(os.path.abspath(os.path.join(source, name)), name, bugly_ids[index])
         break
