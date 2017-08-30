@@ -65,5 +65,25 @@ def copy(image_resource, config_image_json, app_image_folder_dist, verbose):
             print 'not found %s' % p
 
 
+def head_ico_make(source, resource, verbose):
+    if verbose:
+        print 'update head ico'
+    name = 'ico_home_page_title_logo.png'
+    res = os.path.join(source, 'src', 'main', 'res')
+    head_ico_path = os.path.join(res, 'drawable-hdpi')
+
+    head_img = os.path.join(resource, 'ico_home_page_title_logo.png')
+    if not os.path.exists(head_img):
+        raise ValueError("医院logo图片没有上传")
+    else:
+        if verbose:
+            print 'head image path is: %s' % head_img
+            os.remove(os.path.join(head_ico_path, 'ico_home_page_title_logo.png'))
+
+    p = path.join(head_ico_path, name)
+    if os.path.exists(p):
+        shutil.copy(p, head_ico_path)
+
 if __name__ == '__main__':
     make(path.abspath('./resource/icon/icon.png'), path.abspath('./resource/test'), True)
+

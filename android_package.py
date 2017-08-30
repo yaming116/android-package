@@ -10,6 +10,7 @@ import shutil
 import images
 import update_properties
 import wx_maker
+import update_config
 
 'a script for build android package'
 
@@ -42,6 +43,7 @@ if verbose:
 basename = os.path.basename(source)
 app = os.path.join(source, name)
 wx_activity_path = os.path.join(app, 'src/main/java/com/rubik/demo/patient/wxapi/WXPayEntryActivity.java')
+config_path = os.path.join(app, 'src/main/java/com/ucmed/monkey/rubikapp/a/UserConfig.java')
 res = os.path.join(app, 'src', 'main', 'res')
 default_res = os.path.join(res, 'drawable-hdpi')
 gradlew = os.path.join(source, 'gradlew')
@@ -164,6 +166,12 @@ def main():
         update_prop()
     except Exception as e:
         print 'update prop error: message is : %s' % e.message
+        raise e
+
+    try:
+        update_config.update_plist_option(json_config_data['option'], config_path, source, config, verbose)
+    except Exception as e:
+        print '更新配置失败'
         raise e
 
     try:
