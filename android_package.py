@@ -15,6 +15,9 @@ import update_config
 'a script for build android package'
 
 __author__ = 'sunshanming'
+__version__ = '1.0.1'
+
+print 'version: %s' % __version__
 
 parser = argparse.ArgumentParser(description='a script for build android package')
 parser.add_argument('--source', dest='source', help='android source path', required=True)
@@ -39,6 +42,7 @@ if verbose:
     print 'source path: %s' % source
     print 'is test: %s' % test
     print 'name is: %s' % name
+    print 'version is: %s' % __version__
 
 basename = os.path.basename(source)
 app = os.path.join(source, name)
