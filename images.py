@@ -81,7 +81,7 @@ def head_ico_make(source, resource, verbose):
             os.remove(os.path.join(head_ico_path, 'ico_home_page_title_logo.png'))
 
     p = path.join(head_ico_path, name)
-    shutil.copy(p, head_ico_path)
+    shutil.copy(p, head_img)
 
 if __name__ == '__main__':
     make(path.abspath('./resource/icon/icon.png'), path.abspath('./resource/test'), True)
