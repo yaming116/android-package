@@ -7,18 +7,19 @@ import images as icon_make
 import utils.utils as tools
 import re
 import codecs
+import os
 
 
 def update_config(key, value, config_path, verbose):
     try:
         if verbose:
             print '开始更新配置文件'
-        pattern = '\b%s\b\s=[^"]{1}.*' % key
+        pattern = r'\b%s\b\s=[^"]{1}.*' % key
         result = '%s = %s;' % (key, value)
 
         data = tools.load_data_from_file(config_path, verbose)
 
-        data = re.sub(pattern, value, data)
+        data = re.sub(pattern, result, data)
 
         with codecs.open(config_path, 'w', "utf-8") as header_file:
             header_file.write(data)
@@ -43,3 +44,8 @@ def update_plist_option(options, config_path, source, resource, verbose):
     else:
         print 'not found HEAD_IMG'
         update_config('HOMEPAGETITLELOGO', '0', config_path, verbose)
+
+
+if __name__ == '__main__':
+    path = os.path.join('.', 'A.java')
+    update_config('HOMEPAGETITLELOGO', '1', path, True)
