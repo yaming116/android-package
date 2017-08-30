@@ -173,7 +173,7 @@ def main():
         raise e
 
     try:
-        update_config.update_plist_option(json_config_data['option'], config_path, source, config, verbose)
+        update_config.update_plist_option(json_config_data['option'], config_path, source, config_image, verbose)
     except Exception as e:
         print '更新配置失败'
         raise e
