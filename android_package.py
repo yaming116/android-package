@@ -119,6 +119,9 @@ def update_prop():
     global json_config_option
     json_config_data = tools.load_json_from_file(config_json_path, verbose)
 
+    if not json_config_data.has_key('option'):
+        json_config_data['option'] = None
+
     data = json_config_data['prop_list']
     json_config_option = json_config_data['option_list']
     update_properties.update_properties(data, gradle_path, config_apk, basename, test, verbose)
