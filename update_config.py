@@ -45,7 +45,21 @@ def update_plist_option(options, config_path, source, resource, verbose):
         print 'not found HEAD_IMG'
         update_config('HOMEPAGETITLELOGO', '0', config_path, verbose)
 
+    if options.has_key('HOSPITAL_CONFIGURE') and options['HOSPITAL_CONFIGURE']:
+        update_config('HOSPITAL_CONFIGURE', 'true', config_path, verbose)
+    else:
+        update_config('HOSPITAL_CONFIGURE', 'false', config_path, verbose)
+    if options.has_key('HOSPITAL_AREA') and options['HOSPITAL_AREA']:
+        update_config('HOSPITAL_AREA', 'true', config_path, verbose)
+    else:
+        update_config('HOSPITAL_AREA', 'false', config_path, verbose)
+
+    if options.has_key('HOSPITAL_URL'):
+        r = '"%s"' % options['HOSPITAL_URL']
+        update_config('HOSPITAL_URL', r, config_path, verbose)
+
 
 if __name__ == '__main__':
     path = os.path.join('.', 'A.java')
-    update_config('HOMEPAGETITLELOGO', '1', path, True)
+    r = '"%s"' % 'adb'
+    update_config('HOSPITAL_URL', r, path, True)
