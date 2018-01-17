@@ -93,8 +93,12 @@ def update_key_store(config_json_data, props_path,verbose=False):
 
 
 if __name__ == '__main__':
-    json = utils.load_json_from_file('./resource/config.json')
-    properties_path = './Rubik3.0/app/gradle.properties'
-
-    update_properties(json['prop_list'], properties_path, os.path.abspath('./resource/apk'), True)
-    print json['prop_list']['APK_PATH']
+    json = utils.load_json_from_file('./ios.json')
+    json = json[1]
+    if not json.has_key('option'):
+        json['option'] = None
+    print json['option']
+    # properties_path = './Rubik3.0/app/gradle.properties'
+    #
+    # update_properties(json['prop_list'], properties_path, os.path.abspath('./resource/apk'), True)
+    # print json['prop_list']['APK_PATH']
