@@ -58,6 +58,10 @@ def update_plist_option(options, config_path, source, resource, verbose):
         r = '"%s"' % options['HOSPITAL_URL']
         update_config('HOSPITAL_URL', r, config_path, verbose)
 
+    if options.has_key('BONREE'):
+        r = '"%s"' % options['HOSPITAL_URL']
+        update_config('HOSPITAL_URL', r, config_path, verbose)
+
 
 if __name__ == '__main__':
     path = os.path.join('.', 'A.java')

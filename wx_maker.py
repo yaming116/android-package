@@ -18,8 +18,9 @@ def wx_cp(path, package_name, store_path, verbose=False):
 
     data = utils.load_data_from_file(path)
 
-    pattern = r'com.rubik.demo.patient'
-    data = re.sub(pattern, package_name, data)
+    pattern = r'^\bpackage\b.*'
+    value = 'package %s.wxapi;' % package_name;
+    data = re.sub(pattern, value, data)
     wx_file = os.path.join(store_path, 'WXPayEntryActivity.java')
     with codecs.open(wx_file, 'w', "utf-8") as wx_file:
         wx_file.write(data)
