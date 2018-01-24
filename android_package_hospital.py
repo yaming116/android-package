@@ -44,7 +44,7 @@ if verbose:
 basename = os.path.basename(source)
 app = os.path.join(source, name)
 wx_activity_path = os.path.join(app, 'src/main/java/zj/health/zyyy/wxapi/WXPayEntryActivity.java')
-config_path = os.path.join(app, 'src/main/java/com/ucmed/monkey/rubikapp/a/UserConfig.java')
+config_path = os.path.join(app, 'src/main/java/com/example/networksample/ConfigConstant.java')
 res = os.path.join(app, 'src', 'main', 'res')
 default_res = os.path.join(res, 'drawable-hdpi')
 gradlew = os.path.join(source, 'gradlew')
