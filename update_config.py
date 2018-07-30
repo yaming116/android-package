@@ -59,8 +59,8 @@ def update_plist_option(options, config_path, source, resource, verbose):
         update_config('HOSPITAL_URL', r, config_path, verbose)
 
     if options.has_key('BONREE'):
-        r = '"%s"' % options['HOSPITAL_URL']
-        update_config('HOSPITAL_URL', r, config_path, verbose)
+        r = '"%s"' % options['BONREE']
+        update_config('BONREE', r, config_path, verbose)
 
 
 if __name__ == '__main__':
