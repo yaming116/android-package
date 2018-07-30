@@ -24,12 +24,14 @@ parser.add_argument('--source', dest='source', help='android source path', requi
 parser.add_argument('--config', dest='config', help='android config path', required=True)
 parser.add_argument('-name', '--name', dest='name', default='app' , help='project name')
 parser.add_argument('-test', '--test', dest='test', action='store_true' , help='test apk build')
+parser.add_argument('-debug', '--debug', dest='debug', action='store_true' , help='test apk for debug')
 parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='Print verbose logging.')
 
 args = parser.parse_args()
 
 verbose = args.verbose or False
 test = args.test or False
+debug = args.test or False
 parent_config = os.path.abspath(args.config)
 source = os.path.abspath(args.source)
 name = args.name
@@ -200,7 +202,9 @@ def main():
         raise e
 
     try:
-        command = 'cd %s && %s clean aR' % (source, gradlew)
+        command = 'cd %s && %s clean aAppR' % (source, gradlew)
+        if debug:
+            command = 'cd %s && %s clean aStethoR' % (source, gradlew)
         if verbose:
             print 'package command %s' % command
         subprocess.check_call(command, shell=True)
