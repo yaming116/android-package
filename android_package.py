@@ -62,6 +62,7 @@ json_config_image_data = None
 config_json_path = os.path.join(config, 'config.json')
 icon = os.path.join(config, 'icon', 'icon.png')
 config_image = os.path.join(config, 'images')
+config_welcome_image = os.path.join(config, 'welcome_imgs')
 config_image_path = os.path.join(source, 'config.json')
 config_apk = os.path.join(os.path.abspath(os.path.join(config, '..')), 'apk')
 
@@ -181,6 +182,12 @@ def main():
         update_config.update_plist_option(json_config_data['option'], config_path, app, config_image, verbose)
     except Exception as e:
         print '更新配置失败'
+        raise e
+
+    try:
+        update_config.cp_welcome(json_config_data['option'], config_path, default_res, config_welcome_image, verbose)
+    except Exception as e:
+        print '更新启动页失败'
         raise e
 
     try:
