@@ -8,6 +8,7 @@ import utils.utils as tools
 import re
 import codecs
 import os
+import shutil
 
 
 def update_config(key, value, config_path, verbose):
@@ -63,7 +64,36 @@ def update_plist_option(options, config_path, source, resource, verbose):
         update_config('BONREE', r, config_path, verbose)
 
 
+guide_file_names = ['bg_guide_pic1.png' , 'bg_guide_pic2.png'
+    , 'bg_guide_pic3.png', 'bg_guide_pic4.png'
+    , 'bg_guide_pic5.png']
+
+
+def cp_welcome(options, config_path, source, resource, verbose):
+
+    if options.has_key('GUIDE') and options['GUIDE']:
+        update_config('GUIDE', 'true', config_path, verbose)
+    else:
+        return
+
+    files = os.listdir(resource)
+    count = len(files)
+    update_config('GUIDE_COUNT', '%s' % count, config_path, verbose)
+
+    index = 0
+    for f in files:
+        p = path.join(resource, f)
+        s = path.join(source, guide_file_names[index])
+        index = index + 1
+        if os.path.exists(p):
+            shutil.copyfile(p, s)
+
+
 if __name__ == '__main__':
     path = os.path.join('.', 'A.java')
     r = '"%s"' % 'adb'
-    update_config('HOSPITAL_URL', r, path, True)
+    # update_config('HOSPITAL_URL', r, path, True)
+
+    p = os.listdir('D:\\home\\android\\resource\\welcome_imgs')
+    shutil.copyfile()
+    print '%s' % 1
