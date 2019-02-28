@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 verbose = args.verbose or False
 test = args.test or False
-debug = args.test or False
+debug = args.debug or False
 parent_config = os.path.abspath(args.config)
 source = os.path.abspath(args.source)
 name = args.name
