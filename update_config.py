@@ -57,9 +57,9 @@ def update_plist_option(options, config_path, source, resource, verbose):
         update_config('HOSPITAL_AREA', 'false', config_path, verbose)
 
     if options.has_key('IS_OPEN_RECORD_LIST') and options['IS_OPEN_RECORD_LIST']:
-        update_config('IS_OPEN_RECORD_LIST', 'true', config_path, verbose)
-    else:
         update_config('IS_OPEN_RECORD_LIST', 'false', config_path, verbose)
+    else:
+        update_config('IS_OPEN_RECORD_LIST', 'true', config_path, verbose)
 
     if options.has_key('HOSPITAL_URL'):
         r = '"%s"' % options['HOSPITAL_URL']
